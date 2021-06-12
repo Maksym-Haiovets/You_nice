@@ -1,4 +1,4 @@
-import { Body, Controller, Header, HttpCode, HttpStatus, Post } from '@nestjs/common';
+import { Body, Controller, Header, HttpCode, HttpStatus, Post, Redirect, Req, Res } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 
 import { AuthorizationUserDto, CreateUserDto } from 'src/User/Dto/User.dto';
@@ -26,5 +26,13 @@ export class AuthJwtController {
     @Header('Cache-Control', 'none')
     authorization(@Body() authorizationUserDto: AuthorizationUserDto): Promise<any>{
         return this.auhtJWTService.authorization(authorizationUserDto);
+    }
+
+    @ApiOperation({summary: 'User logout'})
+    @Post('/logout')
+    @HttpCode(HttpStatus.OK)
+    @Header('Cache-Control', 'none')
+    logout(@Body() access){
+        return this.auhtJWTService.logout(access)
     }
 }

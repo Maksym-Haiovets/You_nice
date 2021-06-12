@@ -13,7 +13,7 @@ import {
 } from "@nestjs/common";
 
 import { ProcedureService } from './procedure.service'
-import { ProcedureDto } from './Dto/Procedure.dto'
+import { DeleteProcedureDto, ProcedureDto } from './Dto/Procedure.dto'
 import { Procedure, ProcedureDocument } from './ProcedureSchema'
 
 import { AuthGuard } from '../auth-jwt/auth_guard'
@@ -52,7 +52,7 @@ export class ProcedureController {
     @UseGuards(AuthGuard)
     @Roles('ADMIN')
     @UseGuards(CheckRole_Guard)
-    RemoveOneProcedure(@Param('id') id: string): Promise<void> {
+    RemoveOneProcedure(@Param('id') id: string, @Body() deleteProcedureDto: DeleteProcedureDto): Promise<void> {
         return this.procedureSecrvice.RemoveOneProcedure(id);
     }
 

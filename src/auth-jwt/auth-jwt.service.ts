@@ -101,4 +101,8 @@ export class AuthJwtService {
             })}       
         );
     }
+
+    async logout (JWTaccess) {
+        return JWTaccess = '';
+    }
 }
