@@ -43,10 +43,34 @@ export class RecordsProcedureController {
 
   @ApiOperation({summary: 'Show all free time between another records by current staff ID'})
   @ApiResponse({status: HttpStatus.OK})
-  @Post('show-free-time/:id')
+  @Get('show-free-time/:id')
   @HttpCode(HttpStatus.OK)
   async FindFreetimeByCurrentStaffOnWeek(@Param('id') id: String) {
     const data = await this.recordsProcedureService.FindFreetimeByCurrentStaffOnWeek(id);
     return JSON.stringify(Array.from(data.entries()))
   }
+  ////
+  @ApiOperation({summary: 'Show all records information by ADMIN'})
+  @ApiResponse({status: HttpStatus.OK})
+  @Get('All-records/')
+  @HttpCode(HttpStatus.OK)
+  ShowInfoBYrecordsForADMIN(){
+    return this.recordsProcedureService.ShowInfoBYrecordsForADMIN();
+  }
+
+  @ApiOperation({summary: 'Show all records information by STAFF'})
+  @ApiResponse({status: HttpStatus.OK})
+  @Get('recordsBYstaff/:id')
+  @HttpCode(HttpStatus.OK)
+  ShowInfoBYrecordsForSTAFF(@Param('id') id: String){
+    return this.recordsProcedureService.ShowInfoBYrecordsForSTAFF(id)
+  }
+  @ApiOperation({summary: 'Show all records information by USER'})
+  @ApiResponse({status: HttpStatus.OK})
+  @Get('recordsBYuser/:id')
+  @HttpCode(HttpStatus.OK)
+  ShowInfoBYrecordsForUSER(@Param('id') id: String){
+    return this.recordsProcedureService.ShowInfoBYrecordsForUSER(id)
+  }
+
 }

@@ -3,7 +3,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { UserService } from 'src/User/user.service';
 import { ProcedureService } from '../Procedure/procedure.service'
-import { ActiveProcedure, ActiveProcedureDocument } from './ActiveProcedures';
+import { ActiveProcedure, ActiveProcedureDocument } from './ActiveProceduresSchema';
 import { CreateRecordDto, SaveRecordDto } from './Dto/CreateRecords.dto';
 import { RecordsProceduresHelper } from './records.procedures.helper';
 
@@ -97,5 +97,29 @@ export class RecordsProcedureService {
 
     async FindFreetimeByCurrentStaffOnWeek(CurrentStaffID): Promise<Map<String, String>>{
         return await this.recordsProceduresHelper.FindFreetimeByCurrentStaffOnWeek(CurrentStaffID);
+    }
+    
+    async ShowInfoBYrecordsForADMIN(): Promise<ActiveProcedureDocument[]>{
+        const allRecords = await this.ActiveProcedureModel.find();
+        if(!allRecords){
+            throw new HttpException('any records not exist', HttpStatus.NOT_FOUND)
+        }
+        return allRecords
+    }
+
+    async ShowInfoBYrecordsForSTAFF(CurrentStaffID){
+        const allRecordsBYcurrentStaff = await this.ActiveProcedureModel.find({CurrentStaff: CurrentStaffID})
+        if(!allRecordsBYcurrentStaff){
+            throw new HttpException('any records not exist', HttpStatus.NOT_FOUND)
+        }
+        return allRecordsBYcurrentStaff
+    }
+
+    async ShowInfoBYrecordsForUSER(CurrentUserID){
+        const allRecordsBYcurrentStaff = await this.ActiveProcedureModel.find({UserID: CurrentUserID})
+        if(!allRecordsBYcurrentStaff){
+            throw new HttpException('any records not exist', HttpStatus.NOT_FOUND)
+        }
+        return allRecordsBYcurrentStaff
     }
 }

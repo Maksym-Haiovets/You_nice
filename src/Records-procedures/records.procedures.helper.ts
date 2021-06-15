@@ -2,7 +2,7 @@ import { Injectable } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
 import { Model } from "mongoose";
 
-import { ActiveProcedure, ActiveProcedureDocument } from "./ActiveProcedures";
+import { ActiveProcedure, ActiveProcedureDocument } from "./ActiveProceduresSchema";
 import { ProcedureService } from "src/Procedure/procedure.service";
 import {START_DAY, END_DAY} from '../config'
 
