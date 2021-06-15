@@ -4,6 +4,7 @@ import { Model } from 'mongoose';
 
 import { Procedure, ProcedureDocument} from './ProcedureSchema'
 import { ProcedureDto } from './Dto/Procedure.dto'
+import { tmpdir } from "os";
 
 @Injectable()
 export class ProcedureService {
@@ -37,5 +38,12 @@ export class ProcedureService {
 
     async GetAllProcedure (): Promise<ProcedureDocument[]> {
         return await this.procedureModel.find();
+    }
+
+    async GetOneProcedure (TypeProcedure): Promise<ProcedureDocument> {
+        return await this.procedureModel.findOne({Name: TypeProcedure});
+    }
+    async FindById (id): Promise<ProcedureDocument> {
+        return await this.procedureModel.findById({_id: id});
     }
 }

@@ -30,6 +30,10 @@ export class User {
     @ApiProperty({example: 'uniq string', description: 'ref for table role'})
     @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Role' })
     role: Role;
+
+    @ApiProperty({example: 'staff Speciality', description: 'the type of procedure that current staff can make'})
+    @Prop()
+    Speciality?: String
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);

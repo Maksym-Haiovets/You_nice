@@ -17,4 +17,7 @@ export const jwttoken = {
     }
 };
 export const DEFAULT_ROLE = 'USER';
-export const TYPEUSER = ['USER', 'ADMIN']  
+export const TYPEUSER = ['USER', 'ADMIN', 'STAFF'];
+
+export const START_DAY: number = 9; // 9 hour
+export const END_DAY: number = 21;  // 21 hour

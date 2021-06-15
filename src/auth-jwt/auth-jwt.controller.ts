@@ -3,7 +3,7 @@ import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 
 import { AuthorizationUserDto, CreateUserDto } from 'src/User/Dto/User.dto';
 import { AuthJwtService } from './auth-jwt.service';
-import { ResAuthorizationUserType } from './type.respons.auth.swg';
+import { ResAuthorizationUserTypeForSwagger } from './type.respons.auth.swg';
 
 @ApiTags('Registration and Authorization')
 @Controller('auth')
@@ -20,7 +20,7 @@ export class AuthJwtController {
     }
 
     @ApiOperation({summary: 'User authorization'})
-    @ApiResponse({status: HttpStatus.OK, type: ResAuthorizationUserType})
+    @ApiResponse({status: HttpStatus.OK, type: ResAuthorizationUserTypeForSwagger})
     @Post('/login')
     @HttpCode(HttpStatus.OK)
     @Header('Cache-Control', 'none')

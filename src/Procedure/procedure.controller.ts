@@ -27,6 +27,8 @@ export class ProcedureController {
     constructor (private readonly procedureSecrvice: ProcedureService) {}
     //three routes below, access only for ADMIN
     @Post('create')
+    @ApiOperation({summary: 'Create procedure'})
+    @ApiResponse({status: HttpStatus.CREATED})
     @HttpCode(HttpStatus.CREATED)
     @Header('Cache-Control', 'none')
     @UseGuards(AuthGuard)
@@ -37,6 +39,8 @@ export class ProcedureController {
     }
 
     @Put('update/:id')
+    @ApiOperation({summary: 'Update procedure'})
+    @ApiResponse({status: HttpStatus.NO_CONTENT})
     @HttpCode(HttpStatus.NO_CONTENT)
     @Header('Cache-Control', 'none')// what is that?
     @UseGuards(AuthGuard)
@@ -47,6 +51,8 @@ export class ProcedureController {
     }
 
     @Delete('delete/:id')
+    @ApiOperation({summary: 'Delete procedure'})
+    @ApiResponse({status: HttpStatus.NO_CONTENT})
     @HttpCode(HttpStatus.NO_CONTENT)
     @Header('Cache-Control', 'none')
     @UseGuards(AuthGuard)

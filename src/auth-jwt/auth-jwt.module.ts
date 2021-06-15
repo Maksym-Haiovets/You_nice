@@ -7,7 +7,6 @@ import { AuthJwtController } from './auth-jwt.controller';
 import { AuthJwtService } from './auth-jwt.service';
 import { Token, TokenSchema } from './TokenSchema';
 import { UserModule } from '../User/user.module'
-import { AuthGuard } from './auth_guard';
 
 @Module({
   imports: [    
