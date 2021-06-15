@@ -17,6 +17,7 @@ export class RecordsProcedureService {
         @InjectModel(ActiveProcedure.name) private ActiveProcedureModel: Model<ActiveProcedureDocument>,
     ) {}
 
+    // this function using for create and update record
     private async createRecordFOR_save (createRecordDto){
         const record: SaveRecordDto = new SaveRecordDto();
         record.DATA_TIME = new Date(
@@ -94,10 +95,7 @@ export class RecordsProcedureService {
         await this.ActiveProcedureModel.findByIdAndDelete({ _id: id});
     }
 
-    async FindFreetimeByCurrentStaffOnWeek(CurrentStaffID){
-        //const data = await this.recordsProceduresHelper.FindFreetimeByCurrentStaffOnWeek(CurrentStaffID);
-        //console.log('in service:', data)
-        //for(let i = 0; i < data.)
+    async FindFreetimeByCurrentStaffOnWeek(CurrentStaffID): Promise<Map<String, String>>{
         return await this.recordsProceduresHelper.FindFreetimeByCurrentStaffOnWeek(CurrentStaffID);
     }
 }

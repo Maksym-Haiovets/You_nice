@@ -30,7 +30,7 @@ export class RecordsProcedureController {
     return this.recordsProcedureService.updateRecords(id, createRecordDto);
   }
 
-  @ApiOperation({summary: 'Delete record'})
+  @ApiOperation({summary: 'Delete record, only for ADMIN or STAFF'})
   @ApiResponse({status: HttpStatus.NO_CONTENT})
   @Delete('delete/:id')
   @HttpCode(HttpStatus.NO_CONTENT)

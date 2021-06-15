@@ -6,11 +6,13 @@ const bcrypt = require('bcryptjs');
 import { User , UserDocument } from './UserSchema';
 import { CreateUserDto } from './Dto/User.dto';
 import { SALTROUNDS } from '../config';
+import { Role, RoleDocument } from 'src/schemes/RolesSchema';
 
 @Injectable()
 export class UserService {
     constructor(
         @InjectModel(User.name) private userModel: Model<UserDocument>,
+        @InjectModel(Role.name) private roleModel: Model<RoleDocument>,
     ) {}
 
     async CreateUser(createUserDto: CreateUserDto): Promise<any> {
@@ -40,5 +42,21 @@ export class UserService {
             throw new HttpException('this user not found', HttpStatus.NOT_FOUND);
         }
         return user
+    }
+
+    async ChangeRoleUser(CurrentUserID, newRole, speciality?){
+        const currentUser = await this.FindByID(CurrentUserID);
+        if(!currentUser){
+            throw new HttpException('this user not exist', HttpStatus.NOT_FOUND)
+        }
+        const Role = await this.roleModel.findOne({value: newRole});
+
+        if(newRole === 'STAFF'){
+            await this.userModel.updateOne({_id: currentUser._id}, {role: Role, Speciality: speciality})
+        }
+        else{
+            await this.userModel.updateOne({_id: currentUser._id}, {role: Role})
+        }
+        return
     }
 }
