@@ -1,1 +1,1 @@
-web:node src/main.ts
+web:nest start src/main.ts
